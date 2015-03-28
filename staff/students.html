@@ -1,0 +1,69 @@
+<div ng-controller='studentsCtrl' ng-init="dtw_refresh()">
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<form role="form" >
+						<div class="form-group">
+							<label for="weekof">Week:</label>
+							<input id="weekof" class="datepicker form-control" ng-model="formData.weekof" ng-change="dtw_refresh()"/>
+							<label for="show">Assessor:</label>
+							<select id="show" class="form-control" ng-model="assessor_filter">
+								<option value="">All</option>
+								<option value="all_open">All Open</option>
+								<option value="counselor_open">Counselor Open</option>
+								<option value="house_director_open">House Director Open</option>
+								<option value="mentor_open">Mentor Open</option>
+								<option value="teacher_open">Teacher Open</option>
+							</select>
+							<label for="search">Student Filter</label>
+							<input id="search" class="form-control" name="search" ng-model="name_filter">
+						</div>
+					</form>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12"  style="background-color: lightgray">
+				<table class="table table-hover table-condensed">
+					<thead style="display: table-header-group;">
+						<tr>
+							<th class="col-xs-3">Student</th>
+							<th class="col-xs-1">Overview</th>
+							<th class="col-xs-1">Entry</th>
+							<th class="col-xs-1">Counselor</th>
+							<th class="col-xs-1">House</th>
+							<th class="col-xs-1">Mentor</th>
+							<th class="col-xs-1">Teacher</th>
+						</tr>
+					</thead>
+					<tbody >
+						<tr id="{{x.id}}" ng-repeat="x in json_students | filter: name_filter | filter: assessor_filter | orderBy:'name_last'" ng-click="selectstudent(x)">
+							<td class="col-xs-8" style="cursor:pointer">{{x.name_last}}, {{x.name_first}} </td>
+							<td><a href="/staff/index.php/#/overview/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}"><span class="glyphicon glyphicon-eye-open"></span></a> </td>
+							<td><a href="/staff/index.php/#/entry/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}/Counselor"><span class="glyphicon glyphicon-pencil"></span></a></td>
+							<td class="col-xs-1"><a href="/staff/index.php/#/entry/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}/Counselor"><span class="glyphicon glyphicon-{{x.counselor=='1'?'check':'unchecked'}}"></span></a></td>
+							<td class="col-xs-1"><a href="/staff/index.php/#/entry/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}/House_Director"><span class="glyphicon glyphicon-{{x.house_director=='1'?'check':'unchecked'}}"></span></a></td>
+							<td class="col-xs-1"><a href="/staff/index.php/#/entry/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}/Mentor"><span class="glyphicon glyphicon-{{x.mentor=='1'?'check':'unchecked'}}"></span></a></td>
+							<td class="col-xs-1"><a href="/staff/index.php/#/entry/{{x.id}}/{{x.name_first + '_' + x.name_last}}/{{formData.weekof_submit}}/Teacher"><span class="glyphicon glyphicon-{{x.teacher=='1'?'check':'unchecked'}}"></span></a></td>
+						</tr>
+					</tbody>
+ 			</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <li id="overview"><a href="#/overview">Overview</a></li> -->
+
+<script>
+	$(document).ready(function() {
+		$('.nav .active').removeClass("active");
+		$('#students').addClass('active');
+			
+		$(".datepicker").datepicker({
+      		changeMonth: true,
+      		changeYear: true,
+      		showButtonPanel: true
+    	});
+	});
+</script>

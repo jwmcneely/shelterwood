@@ -1,0 +1,78 @@
+<div class="container-fluid">
+	<div ng-controller='entryCtrl' ng-init="get_selections()">
+		<div class="row">
+			<div class='col-xs-12'>
+				<h3 class="text-center">Student: {{name_student}}</h3><br>
+				<span class="text-warning text-center">{{warning}}</span>
+				
+				<form role="form" class="form-inline">
+						<div class="field">
+							<label for="weekof" >Week:</label>
+							<span class="glyphicon glyphicon-chevron-left" ng-click="change_week('prev')" style="cursor:pointer"></span>
+							<input id="weekof" class="datepicker form-control" ng-model="select.weekof" ng-change="dateToWednesday()"/>
+							<span class="glyphicon glyphicon-chevron-right" ng-click="change_week('next')" style="cursor:pointer"></span>
+						</div>
+						<div class="field">
+							<label for="show" >Assessor:</label>
+							<select id="show" class="form-control" ng-model="select.assessor" ng-change="get_selections()">
+								<option value="Counselor">Counselor</option>
+								<option value="House Director">House Director</option>
+								<option value="Mentor">Mentor</option>
+								<option value="Teacher">Teacher</option>
+							</select>
+						</div>
+						<div class="field">
+							<label for="dimension" >Dimension:</label>
+							<select id="dimension" class="form-control" ng-model="select.dimension" ng-change="get_selections()">
+								<option value="Physical Wellbeing">Physical Wellbeing</option>
+								<option value="Spiritual Mindfulness">Spiritual Mindfulness</option>
+								<option value="Mental Toughness">Mental Toughness</option>
+								<option value="Emotional Insight">Emotional Insight</option>
+								<option value="Family Unity">Family Unity</option>
+							</select>
+						</div>
+						<div class="field">
+							<label for="capability" >Capability:</label>
+							<select id="capability" class="form-control" ng-model="select.capability" ng-change="get_selections()">
+								<option value="Reaction">Reaction</option>
+								<option value="Rejection">Rejection</option>
+								<option value="Reflection">Reflection</option>
+								<option value="Resolution">Resolution</option>
+								<option value="Adaptation">Adaptation</option>
+								<option value="Exhaustion">Exhaustion</option>
+								<option value="Activation">Activation</option>
+								<option value="Integration">Integration</option>
+							</select>
+						</div>
+					</form>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class='col-xs-12 text-center'>
+				<table class="table table-condensed table-border">
+					<thead style="display: table-header-group;">
+						<tr><th class="col-xs-1 text-left"><span class="glyphicon glyphicon-ok"></span></th><th class="col-xs-11">Description</th></tr>
+					</thead>
+					<tbody>
+						<tr id="selection_{{x.id_option}}" ng-repeat="(key, x) in json_selections">
+							<td class="col-xs-1 text-left"><span class="glyphicon glyphicon-{{x.selection_active == 1? 'check':'unchecked'}}" ng-click="set_selection_with_countcheck(x.id_option, x.selection_active)" style="cursor: pointer"></span></td><td class="col-xs-11 text-left">{{x.option_text}}</td>
+						<tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('.nav .active').removeClass("active");
+		$('#entry').addClass('active');
+		$(".datepicker").datepicker({
+      		changeMonth: true,
+      		changeYear: true,
+      		showButtonPanel: true
+    	});
+	});
+</script>

@@ -1,0 +1,2 @@
+[09-Jan-2015 00:09:21 America/New_York] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: YES) in /home/lcg/public_html/admin/auth.php on line 16
+[09-Jan-2015 00:09:21 America/New_York] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: YES) in /home/lcg/public_html/admin/auth.php on line 16

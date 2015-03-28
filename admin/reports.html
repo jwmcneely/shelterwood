@@ -1,0 +1,14 @@
+<div class="container-fluid">
+	<div class="col-sm-1 col-lg-3"></div>
+	<div ng-controller='reportsCtrl' class="col-sm-8 col-lg-6 text-center">
+		<h1>This is the {{message}} page</h1>
+	</div>
+	<div class="col-sm-1 col-lg-3"></div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('.nav .active').removeClass("active");
+		$('#reports').addClass('active');
+	});
+</script>

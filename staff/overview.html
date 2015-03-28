@@ -1,0 +1,64 @@
+<div class="container">
+	<div ng-controller="overviewCtrl" ng-init="get_selections()">
+		<div class="row">
+			<div class='col-xs-12'>
+				<h3 class="text-center">Student: {{name_student}}</h3><br>
+				<span class="text-warning text-center">{{warning}}</span>
+				
+				<form role="form" class="form-inline">
+						<div class="field">
+							<label for="weekof" >Week:</label>
+							<span class="glyphicon glyphicon-chevron-left" ng-click="change_week('prev')" style="cursor:pointer"></span>
+							<input id="weekof" class="datepicker form-control" ng-model="select.weekof" ng-change="refresh_selections()"/>
+							<span class="glyphicon glyphicon-chevron-right" ng-click="change_week('next')" style="cursor:pointer"></span>
+						</div>
+						<div class="field">
+							<label for="show" >Assessor:</label>
+							<select id="show" class="form-control" ng-model="select.assessor" ng-change="refresh_selections()">
+								<option value="Counselor">Counselor</option>
+								<option value="House Director">House Director</option>
+								<option value="Mentor">Mentor</option>
+								<option value="Teacher">Teacher</option>
+							</select>
+						</div>
+					</form>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 ">
+				<table class="table table-bordered table-condensed" >
+					<thead style="display: table-header-group;">
+						<tr>
+							<th class="col-xs-1 text-left"><span class="glyphicon glyphicon-home"></span></th>
+							<th class="col-xs-1">Reaction</th>
+							<th class="col-xs-1">Rejection</th>
+							<th class="col-xs-1">Reflection</th>
+							<th class="col-xs-1">Resolution</th>
+							<th class="col-xs-1">Adaptation</th>
+							<th class="col-xs-1">Exhaustion</th>
+							<th class="col-xs-1">Activation</th>
+							<th class="col-xs-1">Integration</th>
+						</tr>
+					</thead>
+					<tbody ng-bind-html="renderHtml(html_selections)">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('.nav .active').removeClass("active");
+		$('#overview').addClass('active');
+		
+		$(".datepicker").datepicker({
+      		changeMonth: true,
+      		changeYear: true,
+      		showButtonPanel: true
+    	});
+	});
+</script>

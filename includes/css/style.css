@@ -1,0 +1,32 @@
+.box-header{
+	font-weight: heavy;
+	color: white;
+	background-color: #535353;
+	border-radius: 5px 0px 0px 0px;
+	}
+ .field, .actions {
+    margin-bottom: 15px;
+  }
+  .field label {
+    float: left;
+    width: 30%;
+    text-align: right;
+    padding-right: 10px;
+    margin: 5px 0px 5px 0px;
+  }
+  .field input {
+    width: 70%;
+    margin: 0px;
+  }
+.field select {
+    width: 70%;
+    margin: 0px;
+  }
+  
+form .ng-invalid {
+  border: 1px solid red;
+}
+
+table .glyphicon {
+	font-size: large;
+	}

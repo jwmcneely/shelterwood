@@ -1,0 +1,98 @@
+<style>
+	.form-control{ width: 100%;}
+</style>
+
+<div ng-controller='optionsCtrl' ng-init="getOptions()">
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6 col-lg-6 text-center">
+			<div class="col-sm-3"></div>
+			<div class="form-group col-sm-6">
+				<label for="dimensions">Dimensions: </label>
+				<select id="dimensions" class="form-control" ng-model="dimensions">
+					<option value="Physical Wellbeing" selected>Physical Wellbeing</option>
+					<option value="Spiritual Mindfulness">Spiritual Mindfulness</option>
+					<option value="Mental Toughness">Mental Toughness</option>
+					<option value="Emotional Insight">Emotional Insight</option>
+					<option value="Family Unity">Family Unity</option>
+				</select>
+		
+				<label for="capabilities">Capabilities</label>
+				<select id="capabilities" class="form-control" ng-model="capabilities">
+					<option value="Reaction" selected>Reaction</option>
+					<option value="Rejection">Rejection</option>
+					<option value="Reflection">Reflection</option>
+					<option value="Resolution">Resolution</option>
+					<option value="Adaptation">Adaptation</option>
+					<option value="Exhaustion">Exhaustion</option>
+					<option value="Activation">Activation</option>
+					<option value="Integration">Integration</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="form-group col-sm-6 text-center">
+			<div class="col-sm-4">
+				<button class="btn btn-danger btn-block" ng-click="add_new_option($index)"><span class="glyphicon glyphicon-plus"></span>&nbspAdd New</button>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<button class="btn btn-danger btn-block" ng-disabled="! change_log[0]" ng-click="save_option_changes()"><span class="glyphicon glyphicon-floppy-save"></span>&nbspSave Changes</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="form-group col-sm-6 text-center">
+			<span class="text-danger">{{errorMessage}}</span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="form-group col-sm-6">
+			<table class="table table-condensed" style="background-color: lightgray">
+				<thead style="display: table-header-group;">
+					<tr><th class="col-sm-9">option Text</th><th class="col-sm-3 text-right">Option</th></tr>
+				</thead>
+				<tbody style="max-height: 150px; overflow-x: scroll;" >
+					<tr id="option_{{x.id}}" ng-repeat="(key, x) in json_options | filter: {filter_str: filterx(dimensions,capabilities)}" >
+						<td>
+							<textarea id="textarea_{{x.id}}" class="form-control" ng-model="x.option_text" ng-change="record_change(x.id)" rows="5" {{$last?'autofocus':''}}>{{x.option_text}}</textarea>
+						</td>
+						<td class="text-right">
+						<select id="active" ng-model="x.active" ng-change="record_change(x.id)" style="background-color: {{x.active == 1 ? '#5fcd64' : '#c8c8c8'}}">
+							<option value="0">Inactive</option>
+							<option value="1">Active</option>
+						</select>
+						<br>
+						<div class="pull-down">
+							<label for="deleted" class="">Delete on Save</label>
+							<select id="deleted" class="" ng-model="x.deleted" ng-change="record_change_delete(x.id, x.deleted)" style="background-color: {{x.deleted == 1 ? '#cd3c3e' : '#ffffff'}}">
+								<option value="0"></option>
+								<option value="1">Delete</option>
+							</select>
+						</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('.nav .active').removeClass("active");
+		$('#options').addClass('active');
+		
+		$('.pull-down').each(function() {
+			$(this).css('margin-top', $(this).parent().height()-$(this).height())
+		});
+	});
+</script>
