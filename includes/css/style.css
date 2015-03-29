@@ -30,3 +30,7 @@ form .ng-invalid {
 table .glyphicon {
 	font-size: large;
 	}
+
+textarea.form-control {
+	height: 50px;
+}

@@ -55,29 +55,35 @@
 
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<div class="form-group col-sm-6">
+		<div class="form-group col-sm-6"><br/><a href="/_tips/index.php" target="_blank">View Tips</a><br/>
 			<table class="table table-condensed" style="background-color: lightgray">
 				<thead style="display: table-header-group;">
-					<tr><th class="col-sm-9">option Text</th><th class="col-sm-3 text-right">Option</th></tr>
+					<tr><th class="col-sm-9">Option Comment Text</th><th class="col-sm-3 text-right">Actions</th></tr>
 				</thead>
 				<tbody style="max-height: 150px; overflow-x: scroll;" >
 					<tr id="option_{{x.id}}" ng-repeat="(key, x) in json_options | filter: {filter_str: filterx(dimensions,capabilities)}" >
 						<td>
-							<textarea id="textarea_{{x.id}}" class="form-control" ng-model="x.option_text" ng-change="record_change(x.id)" rows="5" {{$last?'autofocus':''}}>{{x.option_text}}</textarea>
+							<textarea id="textarea_{{x.id}}" class="form-control" ng-model="x.option_text" ng-change="record_change(x.id)" rows="3" {{$last?'autofocus':''}}>{{x.option_text}}</textarea>
 						</td>
 						<td class="text-right">
 						<select id="active" ng-model="x.active" ng-change="record_change(x.id)" style="background-color: {{x.active == 1 ? '#5fcd64' : '#c8c8c8'}}">
 							<option value="0">Inactive</option>
 							<option value="1">Active</option>
 						</select>
-						<br>
-						<div class="pull-down">
+						<br/><br/>
+						<label for="deleted" class="">Delete on Save</label>
+							<select id="deleted" class="" ng-model="x.deleted" ng-change="record_change_delete(x.id, x.deleted)" style="background-color: {{x.deleted == 1 ? '#cd3c3e' : '#ffffff'}}">
+								<option value="0"></option>
+								<option value="1">Delete</option>
+							</select>
+
+						<!--<div class="pull-down">
 							<label for="deleted" class="">Delete on Save</label>
 							<select id="deleted" class="" ng-model="x.deleted" ng-change="record_change_delete(x.id, x.deleted)" style="background-color: {{x.deleted == 1 ? '#cd3c3e' : '#ffffff'}}">
 								<option value="0"></option>
 								<option value="1">Delete</option>
 							</select>
-						</div>
+						</div>-->
 						</td>
 					</tr>
 				</tbody>
